@@ -1,0 +1,35 @@
+name: Deploy to DO
+
+on: 
+  pull_request:
+  workflow_dispatch:
+
+env:
+  OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - uses: webfactory/ssh-agent@v0.7.0
+      with:
+        ssh-private-key: ${{ secrets.SSH_DO_PRIVATE_KEY }}  
+
+    - name: Install 1Password CLI
+      uses: 1password/install-cli-action@v1
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: .ruby-version
+        bundler-cache: true
+
+    - name: Install Kamal
+      run: gem install kamal
+
+    - name: Deploy to Digital Ocean
+      run: kamal deploy
