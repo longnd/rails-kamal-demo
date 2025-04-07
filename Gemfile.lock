@@ -85,7 +85,7 @@ GEM
     bindex (0.8.1)
     bootsnap (1.18.4)
       msgpack (~> 1.2)
-    brakeman (7.0.0)
+    brakeman (7.0.2)
       racc
     builder (3.3.0)
     capybara (3.40.0)
@@ -175,7 +175,7 @@ GEM
       date
       net-protocol
     net-pop (0.1.2)
-      net-protocol (>= 0)
+      net-protocol
     net-protocol (0.2.2)
       timeout
     net-scp (4.1.0)
